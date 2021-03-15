@@ -8,6 +8,12 @@ namespace Assessment_2_FlipCards
 {
     class Deck
     {
-        
+        Deck[] CardDeck;
+        string FileName;
+
+        public Deck()
+        {
+
+        }
     }
 }
