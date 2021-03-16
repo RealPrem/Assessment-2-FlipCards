@@ -25,7 +25,6 @@ namespace Assessment_2_FlipCards
             MessageBox.Show(openFileDialog1.FileName);
             string FileName = openFileDialog1.FileName;
             Decks[DeckCount] = new Deck();
-            Decks[0].
             //QuestionLabel.Text = Decks[DeckCount].
         }
     }
