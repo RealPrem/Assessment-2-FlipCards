@@ -39,7 +39,7 @@ namespace Assessment_2_FlipCards
         }
         public void NextCard()
         {
-            if (CardIndex == Cards.Length)
+            if (CardIndex == Cards.Length - 1)
             {
                 CardIndex = 0;
             }
@@ -88,6 +88,10 @@ namespace Assessment_2_FlipCards
         public Card GetCard(int i)
         {
             return Cards[i];
+        }
+        public int GetCardIndex()
+        {
+            return CardIndex;
         }
     }
 }

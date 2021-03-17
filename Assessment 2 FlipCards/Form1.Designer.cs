@@ -34,6 +34,8 @@ namespace Assessment_2_FlipCards
             this.QuestionLabel = new System.Windows.Forms.Label();
             this.Previous = new System.Windows.Forms.Button();
             this.Next = new System.Windows.Forms.Button();
+            this.LoadFile = new System.Windows.Forms.Button();
+            this.DeckList = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -43,9 +45,9 @@ namespace Assessment_2_FlipCards
             // ChangeFile
             // 
             this.ChangeFile.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChangeFile.Location = new System.Drawing.Point(369, 12);
+            this.ChangeFile.Location = new System.Drawing.Point(262, 12);
             this.ChangeFile.Name = "ChangeFile";
-            this.ChangeFile.Size = new System.Drawing.Size(92, 31);
+            this.ChangeFile.Size = new System.Drawing.Size(130, 31);
             this.ChangeFile.TabIndex = 0;
             this.ChangeFile.Text = "Select File";
             this.ChangeFile.UseVisualStyleBackColor = true;
@@ -54,9 +56,10 @@ namespace Assessment_2_FlipCards
             // QuestionLabel
             // 
             this.QuestionLabel.AutoSize = true;
-            this.QuestionLabel.Location = new System.Drawing.Point(385, 86);
+            this.QuestionLabel.Font = new System.Drawing.Font("Calibri", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuestionLabel.Location = new System.Drawing.Point(332, 60);
             this.QuestionLabel.Name = "QuestionLabel";
-            this.QuestionLabel.Size = new System.Drawing.Size(58, 17);
+            this.QuestionLabel.Size = new System.Drawing.Size(186, 54);
             this.QuestionLabel.TabIndex = 1;
             this.QuestionLabel.Text = "Question";
             // 
@@ -68,21 +71,45 @@ namespace Assessment_2_FlipCards
             this.Previous.TabIndex = 3;
             this.Previous.Text = "Previous";
             this.Previous.UseVisualStyleBackColor = true;
+            this.Previous.Click += new System.EventHandler(this.Previous_Click);
             // 
             // Next
             // 
-            this.Next.Location = new System.Drawing.Point(485, 136);
+            this.Next.Location = new System.Drawing.Point(508, 137);
             this.Next.Name = "Next";
             this.Next.Size = new System.Drawing.Size(75, 23);
             this.Next.TabIndex = 4;
             this.Next.Text = "Next";
             this.Next.UseVisualStyleBackColor = true;
+            this.Next.Click += new System.EventHandler(this.Next_Click);
+            // 
+            // LoadFile
+            // 
+            this.LoadFile.Font = new System.Drawing.Font("Calibri", 12F);
+            this.LoadFile.Location = new System.Drawing.Point(461, 12);
+            this.LoadFile.Name = "LoadFile";
+            this.LoadFile.Size = new System.Drawing.Size(122, 31);
+            this.LoadFile.TabIndex = 5;
+            this.LoadFile.Text = "Load";
+            this.LoadFile.UseVisualStyleBackColor = true;
+            this.LoadFile.Click += new System.EventHandler(this.LoadFile_Click);
+            // 
+            // DeckList
+            // 
+            this.DeckList.FormattingEnabled = true;
+            this.DeckList.Location = new System.Drawing.Point(12, 12);
+            this.DeckList.Name = "DeckList";
+            this.DeckList.Size = new System.Drawing.Size(210, 25);
+            this.DeckList.TabIndex = 6;
+            this.DeckList.SelectedIndexChanged += new System.EventHandler(this.DeckList_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.DeckList);
+            this.Controls.Add(this.LoadFile);
             this.Controls.Add(this.Next);
             this.Controls.Add(this.Previous);
             this.Controls.Add(this.QuestionLabel);
@@ -102,6 +129,8 @@ namespace Assessment_2_FlipCards
         private System.Windows.Forms.Label QuestionLabel;
         private System.Windows.Forms.Button Previous;
         private System.Windows.Forms.Button Next;
+        private System.Windows.Forms.Button LoadFile;
+        private System.Windows.Forms.ComboBox DeckList;
     }
 }
 
