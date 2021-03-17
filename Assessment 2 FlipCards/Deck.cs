@@ -13,14 +13,15 @@ namespace Assessment_2_FlipCards
         private string FileName;
         private int CardIndex = 0;
 
-        public Deck()
+        public Deck(string FileName)
         {
-            Cards = new Card[]
-            {
-                new Card("Is Water Wet?","Yes"),
-                new Card("Is Sky Blue?","Yes"),
-                new Card("Is Red = Blue?","No")
-            };
+            this.FileName = FileName;
+
+            int FileLength = GetFileLength(FileName);
+
+            Cards = new Card[FileLength];
+
+            LoadFile(FileName);
         }
         /// <summary>
         /// Gets a Random Card
@@ -72,6 +73,17 @@ namespace Assessment_2_FlipCards
                 Cards[Count] = new Card(Question,Answer);
                 Count += 1;
             }
+        }
+        public int GetFileLength(string FileName)
+        {
+            int Count = 0;
+            StreamReader FileReader = new StreamReader(FileName);
+            string Line = "";
+            while ((Line = FileReader.ReadLine()) != null)
+            {
+                Count += 1;
+            }
+            return Count;
         }
         public Card GetCard(int i)
         {

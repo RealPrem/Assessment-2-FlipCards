@@ -17,6 +17,7 @@ namespace Assessment_2_FlipCards
         public Form1()
         {
             InitializeComponent();
+            Decks = new Deck[100];
         }
 
         private void ChangeFile_Click(object sender, EventArgs e)
@@ -24,8 +25,13 @@ namespace Assessment_2_FlipCards
             openFileDialog1.ShowDialog();
             MessageBox.Show(openFileDialog1.FileName);
             string FileName = openFileDialog1.FileName;
-            Decks[DeckCount] = new Deck();
-            //QuestionLabel.Text = Decks[DeckCount].
+            Decks[DeckCount] = new Deck(FileName);
+            DeckCount += 1;
+            QuestionLabel.Text = Decks[0].GetCard(0).GetQuestion();
+        }
+        private void AddDeck(string FileName)
+        {
+            Decks[DeckCount] = new Deck(FileName);
         }
     }
 }
