@@ -18,6 +18,10 @@ namespace Assessment_2_FlipCards
             this.Answer = Answer;
             Flipped = false;
         }
+        /// <summary>
+        /// Checks if the Card is flipped or not
+        /// </summary>
+        /// <returns> Returns the Flipped boolean </returns>
         public bool IsFlipped()
         {
             return Flipped;
@@ -33,16 +37,20 @@ namespace Assessment_2_FlipCards
                 Flipped = false;
             }
         }
+        /// <summary>
+        /// Gets the Question
+        /// </summary>
+        /// <returns> Return Question </returns>
         public string GetQuestion()
         {
             return Question;
         }
+        /// <summary>
+        /// Get the Answer
+        /// </summary>
+        /// <returns> Return Answer </returns>
         public string GetAnswer()
         {
-            if (!Flipped)
-            {
-                return ("NO CHEATING");
-            }
             return Answer;
         }
 

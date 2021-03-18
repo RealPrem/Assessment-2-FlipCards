@@ -36,6 +36,7 @@ namespace Assessment_2_FlipCards
             this.Next = new System.Windows.Forms.Button();
             this.LoadFile = new System.Windows.Forms.Button();
             this.DeckList = new System.Windows.Forms.ComboBox();
+            this.Flip = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -57,9 +58,9 @@ namespace Assessment_2_FlipCards
             // 
             this.QuestionLabel.AutoSize = true;
             this.QuestionLabel.Font = new System.Drawing.Font("Calibri", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QuestionLabel.Location = new System.Drawing.Point(332, 60);
+            this.QuestionLabel.Location = new System.Drawing.Point(350, 63);
             this.QuestionLabel.Name = "QuestionLabel";
-            this.QuestionLabel.Size = new System.Drawing.Size(186, 54);
+            this.QuestionLabel.Size = new System.Drawing.Size(147, 42);
             this.QuestionLabel.TabIndex = 1;
             this.QuestionLabel.Text = "Question";
             // 
@@ -99,15 +100,26 @@ namespace Assessment_2_FlipCards
             this.DeckList.FormattingEnabled = true;
             this.DeckList.Location = new System.Drawing.Point(12, 12);
             this.DeckList.Name = "DeckList";
-            this.DeckList.Size = new System.Drawing.Size(210, 25);
+            this.DeckList.Size = new System.Drawing.Size(210, 21);
             this.DeckList.TabIndex = 6;
             this.DeckList.SelectedIndexChanged += new System.EventHandler(this.DeckList_SelectedIndexChanged);
             // 
+            // Flip
+            // 
+            this.Flip.Location = new System.Drawing.Point(389, 137);
+            this.Flip.Name = "Flip";
+            this.Flip.Size = new System.Drawing.Size(75, 23);
+            this.Flip.TabIndex = 7;
+            this.Flip.Text = "Flip";
+            this.Flip.UseVisualStyleBackColor = true;
+            this.Flip.Click += new System.EventHandler(this.Flip_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Flip);
             this.Controls.Add(this.DeckList);
             this.Controls.Add(this.LoadFile);
             this.Controls.Add(this.Next);
@@ -131,6 +143,7 @@ namespace Assessment_2_FlipCards
         private System.Windows.Forms.Button Next;
         private System.Windows.Forms.Button LoadFile;
         private System.Windows.Forms.ComboBox DeckList;
+        private System.Windows.Forms.Button Flip;
     }
 }
 

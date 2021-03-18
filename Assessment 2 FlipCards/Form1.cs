@@ -16,6 +16,7 @@ namespace Assessment_2_FlipCards
         private int DeckCount = 0;
         private string FileName = "";
         private int ChosenFileIndex;
+        private string Name;
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace Assessment_2_FlipCards
             openFileDialog1.ShowDialog();
             MessageBox.Show(openFileDialog1.FileName);
             FileName = openFileDialog1.FileName;
+            Name = openFileDialog1.SafeFileName;
         }
 
         private void LoadFile_Click(object sender, EventArgs e)
@@ -38,18 +40,18 @@ namespace Assessment_2_FlipCards
 
         public void AddDeck()
         {
-            string Name = FileName;
             DeckList.Items.Add(Name);
         }
         private void DeckList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ChosenFileIndex = DeckList.SelectedIndex;
-            QuestionLabel.Text = Decks[0].GetCard(0).GetQuestion();
+            QuestionLabel.Text = Decks[ChosenFileIndex].GetCard(0).GetQuestion();
         }
 
         private void Next_Click(object sender, EventArgs e)
         {
             Decks[ChosenFileIndex].NextCard();
+
             QuestionLabel.Text = Decks[ChosenFileIndex].GetCard
                 ( Decks[ChosenFileIndex].GetCardIndex() )
                 .GetQuestion();
@@ -58,9 +60,34 @@ namespace Assessment_2_FlipCards
         private void Previous_Click(object sender, EventArgs e)
         {
             Decks[ChosenFileIndex].PreviousCard();
+
             QuestionLabel.Text = Decks[ChosenFileIndex].GetCard
                 (Decks[ChosenFileIndex].GetCardIndex())
                 .GetQuestion();
+        }
+
+        private void Flip_Click(object sender, EventArgs e)
+        {
+            Decks[ChosenFileIndex].GetCard
+                (Decks[ChosenFileIndex].GetCardIndex())
+                .Flip();
+
+            bool Flipped = Decks[ChosenFileIndex].GetCard
+                (Decks[ChosenFileIndex].GetCardIndex())
+                .IsFlipped();
+
+            if (Flipped)
+            {
+                QuestionLabel.Text = Decks[ChosenFileIndex].GetCard
+                (Decks[ChosenFileIndex].GetCardIndex())
+                .GetAnswer();
+            }
+            else
+            {
+                QuestionLabel.Text = Decks[ChosenFileIndex].GetCard
+                (Decks[ChosenFileIndex].GetCardIndex())
+                .GetQuestion();
+            }
         }
     }
 }

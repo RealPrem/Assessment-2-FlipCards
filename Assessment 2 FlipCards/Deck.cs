@@ -52,7 +52,7 @@ namespace Assessment_2_FlipCards
         {
             if (CardIndex == 0)
             {
-                CardIndex = Cards.Length;
+                CardIndex = Cards.Length - 1;
             }
             else
             {
