@@ -30,10 +30,10 @@ namespace Assessment_2_FlipCards
         public Card GetRandomCard()
         {
             Random rnd = new Random();
-            int Index = rnd.Next(Cards.Length);
+            int Index = rnd.Next(0, Cards.Length - 1);
             while (Index == CardIndex)
             {
-                Index = rnd.Next(Cards.Length);
+                Index = rnd.Next(0, Cards.Length - 1);
             }
             return Cards[Index];
         }
@@ -92,6 +92,27 @@ namespace Assessment_2_FlipCards
         public int GetCardIndex()
         {
             return CardIndex;
+        }
+        public void ShuffleDeck()
+        {
+            Random rnd = new Random();
+            int NewIndex;
+
+            for (int i = 0; i < Cards.Length; i += 1)
+            {
+                NewIndex = rnd.Next(0, Cards.Length - 1);
+                Card TempCard = Cards[i];
+                Cards[i] = Cards[NewIndex];
+                Cards[NewIndex] = TempCard;
+            }
+        }
+        public int GetCardsLength()
+        {
+            return Cards.Length;
+        }
+        public void SetCardIndex(int i)
+        {
+            CardIndex = i;
         }
     }
 }

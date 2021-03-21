@@ -37,6 +37,9 @@ namespace Assessment_2_FlipCards
             this.LoadFile = new System.Windows.Forms.Button();
             this.DeckList = new System.Windows.Forms.ComboBox();
             this.Flip = new System.Windows.Forms.Button();
+            this.GetRandomCard = new System.Windows.Forms.Button();
+            this.ShuffleCard = new System.Windows.Forms.Button();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -46,7 +49,7 @@ namespace Assessment_2_FlipCards
             // ChangeFile
             // 
             this.ChangeFile.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChangeFile.Location = new System.Drawing.Point(262, 12);
+            this.ChangeFile.Location = new System.Drawing.Point(366, 12);
             this.ChangeFile.Name = "ChangeFile";
             this.ChangeFile.Size = new System.Drawing.Size(130, 31);
             this.ChangeFile.TabIndex = 0;
@@ -58,17 +61,18 @@ namespace Assessment_2_FlipCards
             // 
             this.QuestionLabel.AutoSize = true;
             this.QuestionLabel.Font = new System.Drawing.Font("Calibri", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QuestionLabel.Location = new System.Drawing.Point(350, 63);
+            this.QuestionLabel.Location = new System.Drawing.Point(480, 58);
             this.QuestionLabel.Name = "QuestionLabel";
-            this.QuestionLabel.Size = new System.Drawing.Size(147, 42);
+            this.QuestionLabel.Size = new System.Drawing.Size(183, 53);
             this.QuestionLabel.TabIndex = 1;
             this.QuestionLabel.Text = "Question";
             // 
             // Previous
             // 
-            this.Previous.Location = new System.Drawing.Point(262, 137);
+            this.Previous.Font = new System.Drawing.Font("Calibri", 10F);
+            this.Previous.Location = new System.Drawing.Point(366, 137);
             this.Previous.Name = "Previous";
-            this.Previous.Size = new System.Drawing.Size(75, 23);
+            this.Previous.Size = new System.Drawing.Size(94, 32);
             this.Previous.TabIndex = 3;
             this.Previous.Text = "Previous";
             this.Previous.UseVisualStyleBackColor = true;
@@ -76,9 +80,10 @@ namespace Assessment_2_FlipCards
             // 
             // Next
             // 
-            this.Next.Location = new System.Drawing.Point(508, 137);
+            this.Next.Font = new System.Drawing.Font("Calibri", 10F);
+            this.Next.Location = new System.Drawing.Point(665, 137);
             this.Next.Name = "Next";
-            this.Next.Size = new System.Drawing.Size(75, 23);
+            this.Next.Size = new System.Drawing.Size(90, 32);
             this.Next.TabIndex = 4;
             this.Next.Text = "Next";
             this.Next.UseVisualStyleBackColor = true;
@@ -87,7 +92,7 @@ namespace Assessment_2_FlipCards
             // LoadFile
             // 
             this.LoadFile.Font = new System.Drawing.Font("Calibri", 12F);
-            this.LoadFile.Location = new System.Drawing.Point(461, 12);
+            this.LoadFile.Location = new System.Drawing.Point(633, 12);
             this.LoadFile.Name = "LoadFile";
             this.LoadFile.Size = new System.Drawing.Size(122, 31);
             this.LoadFile.TabIndex = 5;
@@ -100,25 +105,58 @@ namespace Assessment_2_FlipCards
             this.DeckList.FormattingEnabled = true;
             this.DeckList.Location = new System.Drawing.Point(12, 12);
             this.DeckList.Name = "DeckList";
-            this.DeckList.Size = new System.Drawing.Size(210, 21);
+            this.DeckList.Size = new System.Drawing.Size(210, 25);
             this.DeckList.TabIndex = 6;
             this.DeckList.SelectedIndexChanged += new System.EventHandler(this.DeckList_SelectedIndexChanged);
             // 
             // Flip
             // 
-            this.Flip.Location = new System.Drawing.Point(389, 137);
+            this.Flip.Font = new System.Drawing.Font("Calibri", 10F);
+            this.Flip.Location = new System.Drawing.Point(514, 137);
             this.Flip.Name = "Flip";
-            this.Flip.Size = new System.Drawing.Size(75, 23);
+            this.Flip.Size = new System.Drawing.Size(91, 32);
             this.Flip.TabIndex = 7;
             this.Flip.Text = "Flip";
             this.Flip.UseVisualStyleBackColor = true;
             this.Flip.Click += new System.EventHandler(this.Flip_Click);
             // 
+            // GetRandomCard
+            // 
+            this.GetRandomCard.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GetRandomCard.Location = new System.Drawing.Point(12, 137);
+            this.GetRandomCard.Name = "GetRandomCard";
+            this.GetRandomCard.Size = new System.Drawing.Size(119, 32);
+            this.GetRandomCard.TabIndex = 8;
+            this.GetRandomCard.Text = "Random Card";
+            this.GetRandomCard.UseVisualStyleBackColor = true;
+            this.GetRandomCard.Click += new System.EventHandler(this.GetRandomCard_Click);
+            // 
+            // ShuffleCard
+            // 
+            this.ShuffleCard.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShuffleCard.Location = new System.Drawing.Point(149, 137);
+            this.ShuffleCard.Name = "ShuffleCard";
+            this.ShuffleCard.Size = new System.Drawing.Size(85, 32);
+            this.ShuffleCard.TabIndex = 9;
+            this.ShuffleCard.Text = "Shuffle";
+            this.ShuffleCard.UseVisualStyleBackColor = true;
+            this.ShuffleCard.Click += new System.EventHandler(this.ShuffleCard_Click);
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(12, 88);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(189, 23);
+            this.ProgressBar.TabIndex = 10;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ProgressBar);
+            this.Controls.Add(this.ShuffleCard);
+            this.Controls.Add(this.GetRandomCard);
             this.Controls.Add(this.Flip);
             this.Controls.Add(this.DeckList);
             this.Controls.Add(this.LoadFile);
@@ -144,6 +182,9 @@ namespace Assessment_2_FlipCards
         private System.Windows.Forms.Button LoadFile;
         private System.Windows.Forms.ComboBox DeckList;
         private System.Windows.Forms.Button Flip;
+        private System.Windows.Forms.Button GetRandomCard;
+        private System.Windows.Forms.Button ShuffleCard;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }
 
