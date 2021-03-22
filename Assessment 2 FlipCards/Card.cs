@@ -26,6 +26,9 @@ namespace Assessment_2_FlipCards
         {
             return Flipped;
         }
+        /// <summary>
+        /// It flips the card
+        /// </summary>
         public void Flip()
         {
             if (!Flipped)

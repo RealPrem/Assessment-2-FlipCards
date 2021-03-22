@@ -30,13 +30,19 @@ namespace Assessment_2_FlipCards
         public Card GetRandomCard()
         {
             Random rnd = new Random();
-            int Index = rnd.Next(0, Cards.Length - 1);
+            int Index = rnd.Next(0, Cards.Length);
+            
             while (Index == CardIndex)
             {
-                Index = rnd.Next(0, Cards.Length - 1);
+                Index = rnd.Next(0, Cards.Length);
             }
+
+            CardIndex = Index;
             return Cards[Index];
         }
+        /// <summary>
+        /// Changes to the next card
+        /// </summary>
         public void NextCard()
         {
             if (CardIndex == Cards.Length - 1)
@@ -48,6 +54,9 @@ namespace Assessment_2_FlipCards
                 CardIndex += 1;
             }
         }
+        /// <summary>
+        /// Changes to the previous card
+        /// </summary>
         public void PreviousCard()
         {
             if (CardIndex == 0)
@@ -59,6 +68,10 @@ namespace Assessment_2_FlipCards
                 CardIndex -= 1;
             }
         }
+        /// <summary>
+        /// Loads the File that was chosen
+        /// </summary>
+        /// <param name="FileName"></param>
         public void LoadFile(string FileName)
         {
             int Count = 0;
@@ -74,6 +87,11 @@ namespace Assessment_2_FlipCards
                 Count += 1;
             }
         }
+        /// <summary>
+        /// Gets the file length to initialise the array of cards
+        /// </summary>
+        /// <param name="FileName"></param>
+        /// <returns>The length of the file</returns>
         public int GetFileLength(string FileName)
         {
             int Count = 0;
@@ -85,14 +103,26 @@ namespace Assessment_2_FlipCards
             }
             return Count;
         }
+        /// <summary>
+        /// Gets a specific card with a chosen index
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns> returns the Card with chosen index</returns>
         public Card GetCard(int i)
         {
             return Cards[i];
         }
+        /// <summary>
+        /// Gets the card index
+        /// </summary>
+        /// <returns>The card index</returns>
         public int GetCardIndex()
         {
             return CardIndex;
         }
+        /// <summary>
+        /// Shuffles the deck
+        /// </summary>
         public void ShuffleDeck()
         {
             Random rnd = new Random();
@@ -106,10 +136,18 @@ namespace Assessment_2_FlipCards
                 Cards[NewIndex] = TempCard;
             }
         }
+        /// <summary>
+        /// Gets the length of the cards array
+        /// </summary>
+        /// <returns>length of card array</returns>
         public int GetCardsLength()
         {
             return Cards.Length;
         }
+        /// <summary>
+        /// Sets the card index
+        /// </summary>
+        /// <param name="i"></param>
         public void SetCardIndex(int i)
         {
             CardIndex = i;

@@ -51,6 +51,7 @@ namespace Assessment_2_FlipCards
             ProgressBar.Minimum = 0;
             ProgressBar.Maximum = Decks[ChosenFileIndex].GetCardsLength();
             ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
         }
 
         private void Next_Click(object sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace Assessment_2_FlipCards
                 .GetQuestion();
             IncreaseProgressBar();
             ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
         }
 
         private void Previous_Click(object sender, EventArgs e)
@@ -73,6 +75,7 @@ namespace Assessment_2_FlipCards
                 .GetQuestion();
             DecreaseProgressBar();
             ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
         }
 
         private void Flip_Click(object sender, EventArgs e)
@@ -102,9 +105,11 @@ namespace Assessment_2_FlipCards
         private void GetRandomCard_Click(object sender, EventArgs e)
         {
 
+            Card RandomCard = Decks[ChosenFileIndex].GetRandomCard();
+
             int CardIndex = Decks[ChosenFileIndex].GetCardIndex();
 
-            string RandomCard = Decks[ChosenFileIndex].GetRandomCard().GetQuestion();
+            string Question = RandomCard.GetQuestion();
 
             /*
             while (Decks[ChosenFileIndex].GetCard(CardIndex).GetQuestion() == RandomCard)
@@ -114,9 +119,10 @@ namespace Assessment_2_FlipCards
             */
 
             Decks[ChosenFileIndex].SetCardIndex(CardIndex);
-            QuestionLabel.Text = RandomCard;
+            QuestionLabel.Text = Question;
             ProgressBarValue = CardIndex + 1;
             ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
         }
 
         private void ShuffleCard_Click(object sender, EventArgs e)
@@ -147,6 +153,13 @@ namespace Assessment_2_FlipCards
             {
                 ProgressBarValue -= 1;
             }
+        }
+        private void ChangeCardPosition()
+        {
+            int CardIndex = Decks[ChosenFileIndex].GetCardIndex() + 1;
+            string CurrentCardSpace = CardIndex.ToString();
+            string CardLength = Decks[ChosenFileIndex].GetCardsLength().ToString();
+            CardPosition.Text = "CARD  " + CurrentCardSpace + " / " + CardLength;
         }
     }
 }
