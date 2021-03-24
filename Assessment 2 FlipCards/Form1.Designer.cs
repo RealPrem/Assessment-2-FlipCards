@@ -41,6 +41,8 @@ namespace Assessment_2_FlipCards
             this.ShuffleCard = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.CardPosition = new System.Windows.Forms.Label();
+            this.TestMyself = new System.Windows.Forms.Button();
+            this.AnswerBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -64,7 +66,7 @@ namespace Assessment_2_FlipCards
             this.QuestionLabel.Font = new System.Drawing.Font("Calibri", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QuestionLabel.Location = new System.Drawing.Point(480, 58);
             this.QuestionLabel.Name = "QuestionLabel";
-            this.QuestionLabel.Size = new System.Drawing.Size(147, 42);
+            this.QuestionLabel.Size = new System.Drawing.Size(183, 53);
             this.QuestionLabel.TabIndex = 1;
             this.QuestionLabel.Text = "Question";
             // 
@@ -106,7 +108,7 @@ namespace Assessment_2_FlipCards
             this.DeckList.FormattingEnabled = true;
             this.DeckList.Location = new System.Drawing.Point(12, 12);
             this.DeckList.Name = "DeckList";
-            this.DeckList.Size = new System.Drawing.Size(210, 21);
+            this.DeckList.Size = new System.Drawing.Size(210, 25);
             this.DeckList.TabIndex = 6;
             this.DeckList.SelectedIndexChanged += new System.EventHandler(this.DeckList_SelectedIndexChanged);
             // 
@@ -156,15 +158,36 @@ namespace Assessment_2_FlipCards
             this.CardPosition.Font = new System.Drawing.Font("Calibri", 10F);
             this.CardPosition.Location = new System.Drawing.Point(12, 95);
             this.CardPosition.Name = "CardPosition";
-            this.CardPosition.Size = new System.Drawing.Size(40, 17);
+            this.CardPosition.Size = new System.Drawing.Size(48, 21);
             this.CardPosition.TabIndex = 11;
             this.CardPosition.Text = "CARD";
             // 
+            // TestMyself
+            // 
+            this.TestMyself.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TestMyself.Location = new System.Drawing.Point(12, 191);
+            this.TestMyself.Name = "TestMyself";
+            this.TestMyself.Size = new System.Drawing.Size(119, 31);
+            this.TestMyself.TabIndex = 12;
+            this.TestMyself.Text = "Test Yourself";
+            this.TestMyself.UseVisualStyleBackColor = true;
+            this.TestMyself.Click += new System.EventHandler(this.TestMyself_Click);
+            // 
+            // AnswerBox
+            // 
+            this.AnswerBox.Location = new System.Drawing.Point(514, 137);
+            this.AnswerBox.Name = "AnswerBox";
+            this.AnswerBox.Size = new System.Drawing.Size(100, 24);
+            this.AnswerBox.TabIndex = 13;
+            this.AnswerBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnswerBox_KeyDown);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AnswerBox);
+            this.Controls.Add(this.TestMyself);
             this.Controls.Add(this.CardPosition);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.ShuffleCard);
@@ -198,6 +221,8 @@ namespace Assessment_2_FlipCards
         private System.Windows.Forms.Button ShuffleCard;
         private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.Label CardPosition;
+        private System.Windows.Forms.Button TestMyself;
+        private System.Windows.Forms.TextBox AnswerBox;
     }
 }
 
