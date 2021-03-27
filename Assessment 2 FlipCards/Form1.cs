@@ -19,6 +19,8 @@ namespace Assessment_2_FlipCards
         private string FileName;
         private int ProgressBarValue;
         private string Word = " ";
+        private bool TMSMode = false;
+        private int Score = 0;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +31,10 @@ namespace Assessment_2_FlipCards
             GetRandomCard.Visible = false;
             ShuffleCard.Visible = false;
             AnswerBox.Visible = false;
-        }
+            TestMyself.Visible = false;
+            ExitButton.Visible = false;
+            Answers.Visible = false;
+    }
         /// <summary>
         /// Changes the file that will be chosen to load
         /// </summary>
@@ -82,6 +87,8 @@ namespace Assessment_2_FlipCards
             Flip.Visible = true;
             GetRandomCard.Visible = true;
             ShuffleCard.Visible = true;
+            TestMyself.Visible = true;
+            ExitButton.Visible = true;
         }
         /// <summary>
         /// Changes to the next card
@@ -214,28 +221,120 @@ namespace Assessment_2_FlipCards
             CardPosition.Text = "CARD  " + CurrentCardSpace + " / " + CardLength;
         }
 
+        /// <summary>
+        /// It activates the TestMyself mode and hides the flip button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestMyself_Click(object sender, EventArgs e)
         {
             AnswerBox.Visible = true;
             Flip.Visible = false;
+            Previous.Visible = false;
+            Next.Visible = false;
+            TMSMode = true;
+            Deck Temp = Decks[ChosenFileIndex];
+            Temp.ShuffleDeck();
+            QuestionLabel.Text = Temp.GetCard(0).GetQuestion();
+            ResetAnswerBox();
         }
 
+        /// <summary>
+        /// Checks the answers to the question and showing the user their results
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AnswerBox_KeyDown(object sender, KeyEventArgs e)
         {
             Word = AnswerBox.Text;
             int CardIndex = Decks[ChosenFileIndex].GetCardIndex();
+            int CardsLength = Decks[ChosenFileIndex].GetCardsLength();
 
+            bool[] Correct = new bool[CardsLength - 1];
+            int i = 0;
+
+            //If I press enter then it would get the word from the textbox
             if (e.KeyCode == Keys.Enter)
             {
-                if (Word == Decks[ChosenFileIndex].GetCard(CardIndex).GetAnswer())
+                if (Word.ToLower() == Decks[ChosenFileIndex].GetCard(CardIndex).GetAnswer().ToLower())
                 {
                     MessageBox.Show("CORRECT");
+                    Correct[i] = true;
+                    Score += 1;
                 }
                 else
                 {
                     MessageBox.Show("INCORRECT");
+                    Correct[i] = false;
+                }
+
+                //Adds the Question and checks the box if I got it right in the CheckBox
+                string Question = Decks[ChosenFileIndex].GetCard(CardIndex).GetQuestion();
+                string Answer = Decks[ChosenFileIndex].GetCard(CardIndex).GetAnswer();
+                string QnA = string.Format("Q:{0}  A:{1,2}", Question, Answer);
+                if (Correct[i] == true)
+                {
+                    Answers.SelectionColor = Color.Green;
+                    Answers.AppendText("\r\n" + QnA);
+                    Answers.ScrollToCaret();
+
+                }
+                else
+                {
+                    Answers.SelectionColor = Color.Red;
+                    Answers.AppendText("\r\n" + QnA);
+                    Answers.ScrollToCaret();
+                }
+
+                i += 1;
+
+                //Checking whether the user got 50% or more
+                if (Decks[ChosenFileIndex].GetCardIndex() == Decks[ChosenFileIndex].GetCardsLength() - 1)
+                {
+                    if (((double) Score/Decks[ChosenFileIndex].GetCardsLength()) * 100 >= 50)
+                    {
+                        QuestionLabel.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        QuestionLabel.ForeColor = Color.Red;
+                    }
+                    QuestionLabel.Text = "YOU SCORED " + Score + " / " + Decks[ChosenFileIndex].GetCardsLength();
+                    Answers.Visible = true;
+                }
+                // Changes to the next card when the user finishes answering the question
+                else
+                {
+                    Decks[ChosenFileIndex].NextCard();
+
+                    QuestionLabel.Text = Decks[ChosenFileIndex].GetCard
+                        (Decks[ChosenFileIndex].GetCardIndex())
+                        .GetQuestion();
+                    IncreaseProgressBar();
+                    ProgressBar.Value = ProgressBarValue;
+                    ChangeCardPosition();
                 }
             }           
+        }
+        /// <summary>
+        /// Hides the AnswerBox and Shows the Flip , Previous and Next buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Flip.Visible = true;
+            AnswerBox.Visible = false;
+            Previous.Visible = true;
+            Next.Visible = true;
+            Answers.Visible = false;
+            QuestionLabel.Text = Decks[ChosenFileIndex].GetCard(0).GetQuestion();
+        }
+
+        private void ResetAnswerBox()
+        {
+            Answers.Text = "";
+            Answers.AppendText("Question" + "        " + "CorrectAnswers");
         }
     }
 }
