@@ -45,6 +45,8 @@ namespace Assessment_2_FlipCards
             this.AnswerBox = new System.Windows.Forms.TextBox();
             this.ExitButton = new System.Windows.Forms.Button();
             this.Answers = new System.Windows.Forms.RichTextBox();
+            this.ChallengeButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -143,7 +145,7 @@ namespace Assessment_2_FlipCards
             this.ShuffleCard.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ShuffleCard.Location = new System.Drawing.Point(149, 137);
             this.ShuffleCard.Name = "ShuffleCard";
-            this.ShuffleCard.Size = new System.Drawing.Size(85, 32);
+            this.ShuffleCard.Size = new System.Drawing.Size(119, 32);
             this.ShuffleCard.TabIndex = 9;
             this.ShuffleCard.Text = "Shuffle";
             this.ShuffleCard.UseVisualStyleBackColor = true;
@@ -188,7 +190,7 @@ namespace Assessment_2_FlipCards
             // ExitButton
             // 
             this.ExitButton.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(149, 191);
+            this.ExitButton.Location = new System.Drawing.Point(94, 241);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(85, 31);
             this.ExitButton.TabIndex = 14;
@@ -204,11 +206,34 @@ namespace Assessment_2_FlipCards
             this.Answers.TabIndex = 16;
             this.Answers.Text = "";
             // 
+            // ChallengeButton
+            // 
+            this.ChallengeButton.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChallengeButton.Location = new System.Drawing.Point(149, 191);
+            this.ChallengeButton.Name = "ChallengeButton";
+            this.ChallengeButton.Size = new System.Drawing.Size(119, 31);
+            this.ChallengeButton.TabIndex = 17;
+            this.ChallengeButton.Text = "Challenge Mode";
+            this.ChallengeButton.UseVisualStyleBackColor = true;
+            this.ChallengeButton.Click += new System.EventHandler(this.ChallengeButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(544, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(115, 46);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ChallengeButton);
             this.Controls.Add(this.Answers);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.AnswerBox);
@@ -250,6 +275,8 @@ namespace Assessment_2_FlipCards
         private System.Windows.Forms.TextBox AnswerBox;
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.RichTextBox Answers;
+        private System.Windows.Forms.Button ChallengeButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 

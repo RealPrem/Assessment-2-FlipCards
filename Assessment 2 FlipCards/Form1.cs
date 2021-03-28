@@ -12,19 +12,71 @@ namespace Assessment_2_FlipCards
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Array of Decks
+        /// </summary>
         private Deck[] Decks;
+        /// <summary>
+        /// Temporary Deck for TestMySelf and Challenge Mode
+        /// </summary>
+        private Deck[] TempDecks;
+        /// <summary>
+        /// Amount of Decks loaded
+        /// </summary>
         private int DeckCount = 0;
+        /// <summary>
+        /// File is the FileName + Paths
+        /// </summary>
         private string File = "";
+        /// <summary>
+        /// The index of the file that was chosen in dropdown box
+        /// </summary>
         private int ChosenFileIndex;
+        /// <summary>
+        /// The FileName without path
+        /// </summary>
         private string FileName;
+        /// <summary>
+        /// The value of the ProgressBar
+        /// </summary>
         private int ProgressBarValue;
+        /// <summary>
+        /// The Word inputted when doing TestMySelf or ChallengeMode
+        /// </summary>
         private string Word = " ";
-        private bool TMSMode = false;
+        /// <summary>
+        /// If TestMySelf or ChallengeMode is completed
+        /// </summary>
+        private bool TMSFinished = false;
+        /// <summary>
+        /// The Score the user recieves when answering questions in TestMySelf or ChallengeMode
+        /// </summary>
         private int Score = 0;
+        /// <summary>
+        /// The Amount of time the user has when answering questions in TestMySelf or ChallengeMode
+        /// </summary>
+        private int counter = 15;
+        /// <summary>
+        /// Timer for ChallengeMode
+        /// </summary>
+        private System.Windows.Forms.Timer timer1;
+        /// <summary>
+        /// X value of Colour
+        /// </summary>
+        private int X = 0;
+        /// <summary>
+        /// Y value of Colour
+        /// </summary>
+        private int Y = 128;
+        /// <summary>
+        /// Z value of Colour
+        /// </summary>
+        private int Z = 0;
         public Form1()
         {
             InitializeComponent();
             Decks = new Deck[100];
+            TempDecks = new Deck[1];
             Next.Visible = false;
             Previous.Visible = false;
             Flip.Visible = false;
@@ -34,6 +86,9 @@ namespace Assessment_2_FlipCards
             TestMyself.Visible = false;
             ExitButton.Visible = false;
             Answers.Visible = false;
+            label1.Visible = false;
+            ChallengeButton.Visible = false;
+            QuestionLabel.Visible = false;
     }
         /// <summary>
         /// Changes the file that will be chosen to load
@@ -89,6 +144,8 @@ namespace Assessment_2_FlipCards
             ShuffleCard.Visible = true;
             TestMyself.Visible = true;
             ExitButton.Visible = true;
+            ChallengeButton.Visible = true;
+            QuestionLabel.Visible = true;
         }
         /// <summary>
         /// Changes to the next card
@@ -228,14 +285,16 @@ namespace Assessment_2_FlipCards
         /// <param name="e"></param>
         private void TestMyself_Click(object sender, EventArgs e)
         {
+            Score = 0;
+
             AnswerBox.Visible = true;
             Flip.Visible = false;
             Previous.Visible = false;
             Next.Visible = false;
-            TMSMode = true;
-            Deck Temp = Decks[ChosenFileIndex];
-            Temp.ShuffleDeck();
-            QuestionLabel.Text = Temp.GetCard(0).GetQuestion();
+            
+            TempDecks[0] = Decks[ChosenFileIndex];
+            TempDecks[0].ShuffleDeck();
+            QuestionLabel.Text = TempDecks[0].GetCard(0).GetQuestion();
             ResetAnswerBox();
         }
 
@@ -247,8 +306,8 @@ namespace Assessment_2_FlipCards
         private void AnswerBox_KeyDown(object sender, KeyEventArgs e)
         {
             Word = AnswerBox.Text;
-            int CardIndex = Decks[ChosenFileIndex].GetCardIndex();
-            int CardsLength = Decks[ChosenFileIndex].GetCardsLength();
+            int CardIndex = TempDecks[ChosenFileIndex].GetCardIndex();
+            int CardsLength = TempDecks[ChosenFileIndex].GetCardsLength();
 
             bool[] Correct = new bool[CardsLength - 1];
             int i = 0;
@@ -256,7 +315,7 @@ namespace Assessment_2_FlipCards
             //If I press enter then it would get the word from the textbox
             if (e.KeyCode == Keys.Enter)
             {
-                if (Word.ToLower() == Decks[ChosenFileIndex].GetCard(CardIndex).GetAnswer().ToLower())
+                if (Word.ToLower() == TempDecks[ChosenFileIndex].GetCard(CardIndex).GetAnswer().ToLower())
                 {
                     MessageBox.Show("CORRECT");
                     Correct[i] = true;
@@ -267,10 +326,16 @@ namespace Assessment_2_FlipCards
                     MessageBox.Show("INCORRECT");
                     Correct[i] = false;
                 }
+                //Resetting the Timer
+                X = 0;
+                Y = 128;
+                counter = 15;
+                label1.ForeColor = Color.FromArgb(X, Y, Z);
+                label1.Text = counter.ToString();
 
                 //Adds the Question and checks the box if I got it right in the CheckBox
-                string Question = Decks[ChosenFileIndex].GetCard(CardIndex).GetQuestion();
-                string Answer = Decks[ChosenFileIndex].GetCard(CardIndex).GetAnswer();
+                string Question = TempDecks[ChosenFileIndex].GetCard(CardIndex).GetQuestion();
+                string Answer = TempDecks[ChosenFileIndex].GetCard(CardIndex).GetAnswer();
                 string QnA = string.Format("Q:{0}  A:{1,2}", Question, Answer);
                 if (Correct[i] == true)
                 {
@@ -289,9 +354,9 @@ namespace Assessment_2_FlipCards
                 i += 1;
 
                 //Checking whether the user got 50% or more
-                if (Decks[ChosenFileIndex].GetCardIndex() == Decks[ChosenFileIndex].GetCardsLength() - 1)
+                if (TempDecks[ChosenFileIndex].GetCardIndex() == TempDecks[ChosenFileIndex].GetCardsLength() - 1)
                 {
-                    if (((double) Score/Decks[ChosenFileIndex].GetCardsLength()) * 100 >= 50)
+                    if (((double) Score/TempDecks[ChosenFileIndex].GetCardsLength()) * 100 >= 50)
                     {
                         QuestionLabel.ForeColor = Color.Green;
                     }
@@ -299,22 +364,24 @@ namespace Assessment_2_FlipCards
                     {
                         QuestionLabel.ForeColor = Color.Red;
                     }
-                    QuestionLabel.Text = "YOU SCORED " + Score + " / " + Decks[ChosenFileIndex].GetCardsLength();
+                    QuestionLabel.Text = "YOU SCORED " + Score + " / " + TempDecks[ChosenFileIndex].GetCardsLength();
                     Answers.Visible = true;
+                    TMSFinished = true;
+                    label1.Visible = false;
                 }
                 // Changes to the next card when the user finishes answering the question
                 else
                 {
-                    Decks[ChosenFileIndex].NextCard();
+                    TempDecks[ChosenFileIndex].NextCard();
 
-                    QuestionLabel.Text = Decks[ChosenFileIndex].GetCard
-                        (Decks[ChosenFileIndex].GetCardIndex())
+                    QuestionLabel.Text = TempDecks[ChosenFileIndex].GetCard
+                        (TempDecks[ChosenFileIndex].GetCardIndex())
                         .GetQuestion();
                     IncreaseProgressBar();
                     ProgressBar.Value = ProgressBarValue;
                     ChangeCardPosition();
                 }
-            }           
+            }
         }
         /// <summary>
         /// Hides the AnswerBox and Shows the Flip , Previous and Next buttons
@@ -328,13 +395,80 @@ namespace Assessment_2_FlipCards
             Previous.Visible = true;
             Next.Visible = true;
             Answers.Visible = false;
-            QuestionLabel.Text = Decks[ChosenFileIndex].GetCard(0).GetQuestion();
-        }
+            TMSFinished = false;
+            label1.Visible = false;
 
+            //Resetting everything and going back to first card
+            QuestionLabel.ForeColor = Color.Black;
+            Decks[ChosenFileIndex].NextCard();
+            int CardIndex = Decks[ChosenFileIndex].GetCardIndex();
+            QuestionLabel.Text = Decks[ChosenFileIndex].GetCard(CardIndex).GetQuestion();
+            ProgressBarValue = 1;
+            ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
+
+        }
+        /// <summary>
+        /// Clears the AnswerBox if the user uses TestMySelf or Challenge Mode again and adds the Question + CorrectAnswers as a title 
+        /// </summary>
         private void ResetAnswerBox()
         {
             Answers.Text = "";
             Answers.AppendText("Question" + "        " + "CorrectAnswers");
+        }
+
+        /// <summary>
+        /// Activates ChallengeMode and Starts the timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChallengeButton_Click(object sender, EventArgs e)
+        {
+            //Creating Timer and setting the amount of the user has
+            Score = 0;
+            counter = 15;
+            timer1 = new System.Windows.Forms.Timer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = 1000; // 1 second
+            timer1.Start();
+            label1.ForeColor = Color.FromArgb(X, Y, Z);
+            label1.Text = counter.ToString();
+
+            AnswerBox.Visible = true;
+            Flip.Visible = false;
+            Previous.Visible = false;
+            Next.Visible = false;
+            ChallengeButton.Visible = true;
+            label1.Visible = true;
+
+            TempDecks[0] = Decks[ChosenFileIndex];
+            TempDecks[0].ShuffleDeck();
+            QuestionLabel.Text = TempDecks[0].GetCard(0).GetQuestion();
+            ResetAnswerBox();
+        }
+        /// <summary>
+        /// When time changed by 1 second, updates the Time Label
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //Constantly changing colour
+            X = X + (255 / 15);
+            Y = Y - (128 / 15);
+            label1.ForeColor = Color.FromArgb(X, Y, Z);
+
+            counter -= 1;
+            if (counter == 0)
+            {
+                timer1.Stop();
+                QuestionLabel.Text = "ANSWER NOW";
+            }
+            else if (TMSFinished == true)
+            {
+                timer1.Stop();
+            }
+            label1.Text = counter.ToString();
         }
     }
 }
