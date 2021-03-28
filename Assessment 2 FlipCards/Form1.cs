@@ -89,6 +89,8 @@ namespace Assessment_2_FlipCards
             label1.Visible = false;
             ChallengeButton.Visible = false;
             QuestionLabel.Visible = false;
+            ProgressBar.Visible = false;
+            CardPosition.Visible = false;
     }
         /// <summary>
         /// Changes the file that will be chosen to load
@@ -146,6 +148,8 @@ namespace Assessment_2_FlipCards
             ExitButton.Visible = true;
             ChallengeButton.Visible = true;
             QuestionLabel.Visible = true;
+            ProgressBar.Visible = true;
+            CardPosition.Visible = true;
         }
         /// <summary>
         /// Changes to the next card
@@ -294,6 +298,10 @@ namespace Assessment_2_FlipCards
             
             TempDecks[0] = Decks[ChosenFileIndex];
             TempDecks[0].ShuffleDeck();
+            TempDecks[0].SetCardIndex(0);
+            ProgressBarValue = 1;
+            ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
             QuestionLabel.Text = TempDecks[0].GetCard(0).GetQuestion();
             ResetAnswerBox();
         }
@@ -317,13 +325,11 @@ namespace Assessment_2_FlipCards
             {
                 if (Word.ToLower() == TempDecks[ChosenFileIndex].GetCard(CardIndex).GetAnswer().ToLower())
                 {
-                    MessageBox.Show("CORRECT");
                     Correct[i] = true;
                     Score += 1;
                 }
                 else
                 {
-                    MessageBox.Show("INCORRECT");
                     Correct[i] = false;
                 }
                 //Resetting the Timer
@@ -440,9 +446,14 @@ namespace Assessment_2_FlipCards
             Next.Visible = false;
             ChallengeButton.Visible = true;
             label1.Visible = true;
+            
 
             TempDecks[0] = Decks[ChosenFileIndex];
             TempDecks[0].ShuffleDeck();
+            TempDecks[0].SetCardIndex(0);
+            ProgressBarValue = 1;
+            ProgressBar.Value = ProgressBarValue;
+            ChangeCardPosition();
             QuestionLabel.Text = TempDecks[0].GetCard(0).GetQuestion();
             ResetAnswerBox();
         }
